@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="Js/bootstrap.bundle.js">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
+  <title>Booking</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+    rel="stylesheet">
+
+
+  <style>
+  
+    body {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 500;
+      background-color: #d4cdcc;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .label {
+      margin-right: 10px; 
+  }
+  
+  .price-wrapper,
+  .gst-wrapper,
+  .total-price-wrapper {
+      margin-top: 10px; 
+     
+  }
+  .price{
+    margin-left: 340px;
+  }
+  .GST{
+    margin-left: 346px;
+  }
+  .total_price{
+    margin-left: 300px;
+  }
+  
+
+    .main {
+      margin-top: 50px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg" style="background-color: #f3422b;">
+    <div class="container">
+      <a class="navbar-brand" href="#"><i class="bi bi-film"><b> <strong>Movie<span style="color: #d4cdcc">Tickets</span></strong></b></i></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="/index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/movies.html">Movies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Tickets</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" style="width: 500px;" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-dark" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <center>
+
+
+    <div class="card  mb-2 main roundered-5" style="width: 800px;box-shadow: 10px 10px 5px #2b2d2e;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img class="movie-image img-fluid rounded-start" alt="Movie Image">
+        </div>
+        <div class="col-md-8" style="background-color:white;color:black
+        ">
+          <div class="mt-3" style="text-align: left;margin:25px;">
+            <h1 class="mname"></h1>
+            <h6 class="mbadge"></h6>
+            <p class="duration"></p>
+            <hr>
+            <div class="row">
+              <div class="col-6">
+                
+                <h6 class="Avaliable"></h6>
+              </div>
+
+            </div>
+
+
+
+            <button type="button" id="bookButton" class="btn btn-danger" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">
+              Book Tickets
+            </button>
+
+            <div class="modal fade mt-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Booking Details</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <label for="seatCount">Enter number of seats:</label>
+                    <input type="number" style="width: 50px;" id="seatCount" name="seatCount" min="1" max="10"
+                      >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label for="">Time</label>
+                    <select id="movieTime">
+                      <option value="10:00 AM">10:00 AM</option>
+                      <option value="1:00 PM">1:00 PM</option>
+                      <option value="4:00 PM">4:00 PM</option>
+                      <option value="7:00 PM">7:00 PM</option>
+                      <option value="10:00 PM">10:00 PM</option>
+                    </select>
+                    <hr>
+                    <div class="price-wrapper">
+                      <span class="label">Price:</span>
+                      <span class="price">₹ </span>
+                  </div>
+                  <div class="gst-wrapper">
+                      <span class="label">GST:</span>
+                      <span class="GST">₹ </span>
+                  </div>
+                  <div class="total-price-wrapper">
+                      <span class="label">Total Price:</span>
+                      <span class="total_price">₹ </span>
+                  </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="bookTickets()" >Book</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+  </center>
+
+  <script>
+   
+
+    function bookTickets() {
+      var mname = document.querySelector('.mname').textContent;
+      var seatCount = document.getElementById("seatCount").value;
+      var totalPrice = document.querySelector('.total_price').textContent;
+      var time = document.getElementById("movieTime").value;
+      
+  
+     
+
+      var url = "tickets.html" + "?mname=" + encodeURIComponent(mname) + "&seatCount=" + encodeURIComponent(seatCount) +"&totalPrice=" + encodeURIComponent(totalPrice) + "&time=" + encodeURIComponent(time);
+  
+     
+      window.location.href = url;
+  }
+  
+
+    function updatePrice() {
+      var seatCount = document.getElementById("seatCount").value;
+      var price = seatCount * 150;
+      var gst = price * 0.18; 
+      var totalPrice = price + gst;
+      document.querySelector('.price').textContent = "₹" + price;
+      document.querySelector('.GST').textContent = "₹" + gst;
+      document.querySelector('.total_price').textContent = "₹" + totalPrice.toFixed(2);
+
+    }
+    document.getElementById("seatCount").addEventListener("input", updatePrice);
+    updatePrice();
+
+    window.onload = function () {
+
+      var urlParams = new URLSearchParams(window.location.search);
+      var value = urlParams.get('value');
+
+
+      var mname = document.querySelector('.mname');
+      var mbadge = document.querySelector('.mbadge');
+      var duration = document.querySelector('.duration');
+
+      var available = document.querySelector('.Avaliable');
+      var image = document.querySelector('.movie-image');
+
+
+
+      switch (value) {
+        case 'theri':
+          mname.innerHTML = 'Theri';
+          mbadge.innerHTML = '<span class="badge text-bg-secondary">2D</span> <span class="badge text-bg-secondary">Tamil</span>';
+          duration.innerHTML = '2h 22m / Adventure / UA';
+
+         
+          image.src = '/images/theri.jpg';
+
+          break;
+        case 'hridayam':
+          mname.innerHTML = 'Hridayam';
+          mbadge.innerHTML = '<span class="badge text-bg-secondary">2D</span> <span class="badge text-bg-secondary">Malayalam</span>';
+          duration.innerHTML = '2h 30m / Romance / U';
+
+         
+          image.src = '/images/H.jpg';
+          break;
+        case 'bahubali':
+          mname.innerHTML = 'Bahubali-2';
+          mbadge.innerHTML = '<span class="badge text-bg-secondary">2D</span> <span class="badge text-bg-secondary">Telugu</span>';
+          duration.innerHTML = '2h 30m / Fantasy / U';
+
+        
+          image.src = '/images/bahubali.jpg';
+          break;
+        case 'spiderman':
+          mname.innerHTML = 'Spider-man 2';
+          mbadge.innerHTML = '<span class="badge text-bg-secondary">3D</span> <span class="badge text-bg-secondary">English</span>';
+          duration.innerHTML = '2h 30m / Sci-fi / U';
+
+          
+          image.src = '/images/spiderman.jpg';
+          break;
+        case 'dunki':
+          mname.innerHTML = 'Dunki';
+          mbadge.innerHTML = '<span class="badge text-bg-secondary">2D</span> <span class="badge text-bg-secondary">Hindi</span>';
+          duration.innerHTML = '2h 33m / Drama / U';
+
+         
+          image.src = '/images/dunki.jpg';
+          break;
+        case 'animal':
+          mname.innerHTML = 'Animal';
+          mbadge.innerHTML = '<span class="badge text-bg-secondary">2D</span> <span class="badge text-bg-secondary">Hindi</span>';
+          duration.innerHTML = '2h 30m / Crime / U';
+
+         
+          image.src = '/images/animal.jpg';
+          break;
+        case 'war':
+          mname.innerHTML = 'War';
+          mbadge.innerHTML = '<span class="badge text-bg-secondary">2D</span> <span class="badge text-bg-secondary">Hindi</span>';
+          duration.innerHTML = '2h 45m / Action / U';
+
+          
+          image.src = '/images/War.jpg';
+          break;
+        case 'kgf':
+          mname.innerHTML = 'KGF: Chapter-2';
+          mbadge.innerHTML = '<span class="badge text-bg-secondary">2D</span> <span class="badge text-bg-secondary">Telugu</span>';
+          duration.innerHTML = '2h 45m / Thriller / U';
+
+          
+          image.src = '/images/kgf.jpg';
+          break;
+        case 'avator':
+          mname.innerHTML = 'Avator';
+          mbadge.innerHTML = '<span class="badge text-bg-secondary">3D</span> <span class="badge text-bg-secondary">English</span>';
+          duration.innerHTML = '2h 40m / Sci-fi / U';
+
+          
+          image.src = '/images/avator.jpeg';
+          break;
+        case 'conjuring':
+          mname.innerHTML = 'The Conjuring-2';
+          mbadge.innerHTML = '<span class="badge text-bg-secondary">3D</span> <span class="badge text-bg-secondary">English</span>';
+          duration.innerHTML = '2h 22m / Horror / U';
+
+          
+          image.src = '/images/conjuring.jpg';
+          break;
+        case 'harry':
+          mname.innerHTML = 'Harry Potter';
+          mbadge.innerHTML = '<span class="badge text-bg-secondary">3D</span> <span class="badge text-bg-secondary">English</span>';
+          duration.innerHTML = '2h 30m / Series / U';
+
+          
+          image.src = '/images/harry.jpg';
+          break;
+
+
+        default:
+          mname.innerHTML = 'Unknown';
+          mbadge.innerHTML = '';
+          duration.innerHTML = '';
+          total.innerHTML = '';
+          available.innerHTML = '';
+          image.src = '';
+      }
+    }
+  </script>
+
+
+
+  <script src="./sample.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
